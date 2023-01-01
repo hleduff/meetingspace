@@ -1,15 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-type AuthState = {
+type IAuthState = {
     token: string | null;
     expirationDate: string | null;
 };
 
-const authSlice = createSlice({
+const initialState: IAuthState = {
+    token: null,
+    expirationDate: null,
+};
+
+export const authSlice = createSlice({
     name: 'auth',
-    initialState: { token: null, expirationDate: null } as AuthState,
+    initialState: { token: null, expirationDate: null } as IAuthState,
     reducers: {
+        resetAuth: () => initialState,
         setAuth: (
             state,
             {
@@ -22,6 +28,6 @@ const authSlice = createSlice({
     },
 });
 
-export const { setAuth } = authSlice.actions;
+export const { resetAuth, setAuth } = authSlice.actions;
 
 export default authSlice.reducer;
