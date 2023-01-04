@@ -1,3 +1,9 @@
-export const Greet = ({ name = '' as string }) => (
-    <p className="regText">Hello {name}!</p>
-);
+import { useAppSelector } from '../../app/store';
+
+export const Greet = () => {
+    const userName = useAppSelector((state) => state.user.name);
+
+    return (
+        <p className="regText">Hello {userName}!</p>
+    );
+};

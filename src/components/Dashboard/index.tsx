@@ -1,7 +1,7 @@
 import { Greet } from '../Greet';
 
-export const Dashboard = ({ name = '' as string }) => (
+export const Dashboard = () => (
     <div>
-        <Greet name={name} />
+        <Greet />
     </div>
 );
