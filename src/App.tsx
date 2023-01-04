@@ -1,5 +1,14 @@
-import { Layout } from './components';
+import { useAppSelector } from './app/store';
+import { Dashboard, Layout } from './components';
 
-const App = () => <Layout>main content</Layout>;
+const App = () => {
+    const authToken = useAppSelector((state) => state.auth.token);
+
+    return (
+        <Layout>
+            {authToken && <Dashboard />}
+        </Layout>
+    );
+};
 
 export default App;
