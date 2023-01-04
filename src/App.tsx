@@ -3,10 +3,11 @@ import { Dashboard, Layout } from './components';
 
 const App = () => {
     const authToken = useAppSelector((state) => state.auth.token);
+    const userName = useAppSelector((state) => state.user.name) || '';
 
     return (
         <Layout>
-            {authToken && <Dashboard />}
+            {authToken && <Dashboard name={userName} />}
         </Layout>
     );
 };
