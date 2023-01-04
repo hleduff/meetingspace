@@ -16,8 +16,8 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: URL_API,
         prepareHeaders: (headers, { getState, endpoint }) => {
-            // skip Bearer Token setting for both these endpoints
-            if (['login', 'resetEnvironment'].includes(endpoint)) return;
+            // skip Bearer Token setting for login endpoint
+            if (endpoint === 'login') return;
 
             const token = (getState() as RootState).auth.token;
 

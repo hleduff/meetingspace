@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../app/store';
 import { useGetMeMutation, useLoginMutation, useLogoutMutation } from '../../features/api/apiSlice';
-import { resetAuth, setAuth } from '../../features/auth/authSlice';
-import { setUser, resetUser } from '../../features/user/userSlice';
+import { setAuth } from '../../features/auth/authSlice';
+import { setUser } from '../../features/user/userSlice';
 
 import styles from './style.module.css';
 
@@ -28,9 +28,7 @@ export const Header = () => {
 
     const handleLogout = async () => {
         try {
-            const { data } = await logout().unwrap();
-            dispatch(resetAuth);
-            dispatch(resetUser);
+            await logout();
         } catch (err) {
             console.error(err);
         }
