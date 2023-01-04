@@ -9,10 +9,12 @@ import styles from './style.module.css';
 
 export const Header = () => {
     const dispatch = useDispatch();
+
     const [login, { isLoading: loginLoading }] = useLoginMutation();
     const [getMe] = useGetMeMutation();
     const [logout, { isLoading: logoutLoading }] = useLogoutMutation();
 
+    const authToken = useAppSelector((state) => state.auth.token);
     const userName = useAppSelector((state) => state.user.name);
 
     const handleLogin = async () => {
@@ -40,7 +42,7 @@ export const Header = () => {
                 meeting<span className={styles.highlight}>space</span>
             </h1>
             <div className={styles.user}>
-                {!userName && 
+                {!authToken &&
                     <button
                         type="button"
                         onClick={handleLogin}
