@@ -1,5 +1,12 @@
-import { Layout } from './components';
+import { useAuthToken } from './app/hooks';
+import { Dashboard, Login } from './views';
 
-const App = () => <Layout>main content</Layout>;
+const App = () => {
+    const authToken = useAuthToken();
+
+    return (
+        authToken ? <Dashboard /> : <Login />
+    )
+};
 
 export default App;
