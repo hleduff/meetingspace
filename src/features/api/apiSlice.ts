@@ -58,17 +58,14 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReAuth,
     endpoints: (builder) => ({
-        resetEnvironment: builder.query<IGeneric, void>({
-            query: () => ({ url: '/reset', method: 'GET' }),
-        }),
         getBookings: builder.query<IBookings, void>({
-            query: () => ({ url: `/bookings`, method: 'GET' }),
+            query: () => ({ url: '/bookings', method: 'GET' }),
         }),
         getMe: builder.mutation<IGetMe, void>({
             query: () => ({ url: '/me', method: 'GET' }),
         }),
         getResource: builder.query<IResource, void>({
-            query: () => ({ url: `/resource`, method: 'GET' }),
+            query: () => ({ url: '/resource', method: 'GET' }),
         }),
         getUser: builder.query<IGetMe, string>({
             query: (id) => ({ url: `/users/${id}`, method: 'GET' }),
@@ -78,6 +75,9 @@ export const apiSlice = createApi({
         }),
         logout: builder.mutation<ILogout, void>({
             query: () => ({ url: '/logout', method: 'GET' }),
+        }),
+        resetEnvironment: builder.mutation<IGeneric, void>({
+            query: () => ({ url: '/reset', method: 'GET' }),
         }),
     }),
 });
@@ -89,5 +89,5 @@ export const {
     useGetUserQuery,
     useLoginMutation,
     useLogoutMutation,
-    useResetEnvironmentQuery,
+    useResetEnvironmentMutation,
 } = apiSlice;

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../app/store';
-import { useGetMeMutation, useLoginMutation, useLogoutMutation } from '../../features/api/apiSlice';
+import { useGetMeMutation, useLoginMutation, useLogoutMutation, useResetEnvironmentMutation } from '../../features/api/apiSlice';
 import { setAuth } from '../../features/auth/authSlice';
 import { setUser } from '../../features/user/userSlice';
 
@@ -13,6 +13,7 @@ export const Header = () => {
     const [login, { isLoading: loginLoading }] = useLoginMutation();
     const [getMe] = useGetMeMutation();
     const [logout, { isLoading: logoutLoading }] = useLogoutMutation();
+    const [reset] = useResetEnvironmentMutation();
 
     const authToken = useAppSelector((state) => state.auth.token);
     const userName = useAppSelector((state) => state.user.name);
@@ -36,12 +37,20 @@ export const Header = () => {
         }
     };
 
+    const handleReset = async () => {
+        try {
+            await reset();
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return (
         <header className={styles.header}>
             <h1 className={styles.title}>
                 meeting<span className="highlight">space</span>
             </h1>
-            <div className={styles.user}>
+            <div className={styles.menu}>
                 {!authToken &&
                     <button
                         type="button"
@@ -65,6 +74,12 @@ export const Header = () => {
                         </button>
                     </>
                 )}
+                <button
+                    type="button"
+                    onClick={handleReset}
+                >
+                    Reset
+                </button>
             </div>
         </header>
     );
