@@ -19,10 +19,6 @@
     font-weight: 600;
 }
 
-.highlight {
-    color: var(--main);
-}
-
 .user {
     display: flex;
     align-items: center;
