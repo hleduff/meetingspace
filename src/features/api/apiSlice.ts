@@ -5,10 +5,12 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../../app/store';
 
 import type {
-    IGenericResponse,
-    IGetMeResponse,
-    ILoginResponse,
-    ILogoutResponse,
+    IBookings,
+    IGeneric,
+    IGetMe,
+    ILogin,
+    ILogout,
+    IResource,
 } from '../../types/types';
 import { loggedOut } from '../auth/authSlice';
 import { resetUser } from '../user/userSlice';
@@ -56,23 +58,35 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReAuth,
     endpoints: (builder) => ({
-        resetEnvironment: builder.query<IGenericResponse, void>({
+        resetEnvironment: builder.query<IGeneric, void>({
             query: () => ({ url: '/reset', method: 'GET' }),
         }),
-        login: builder.mutation<ILoginResponse, void>({
+        getBookings: builder.query<IBookings, void>({
+            query: () => ({ url: `/bookings`, method: 'GET' }),
+        }),
+        getMe: builder.mutation<IGetMe, void>({
+            query: () => ({ url: '/me', method: 'GET' }),
+        }),
+        getResource: builder.query<IResource, void>({
+            query: () => ({ url: `/resource`, method: 'GET' }),
+        }),
+        getUser: builder.query<IGetMe, string>({
+            query: (id) => ({ url: `/users/${id}`, method: 'GET' }),
+        }),
+        login: builder.mutation<ILogin, void>({
             query: () => ({ url: '/login', method: 'GET' }),
         }),
-        logout: builder.mutation<ILogoutResponse, void>({
+        logout: builder.mutation<ILogout, void>({
             query: () => ({ url: '/logout', method: 'GET' }),
-        }),
-        getMe: builder.mutation<IGetMeResponse, void>({
-            query: () => ({ url: '/me', method: 'GET' }),
         }),
     }),
 });
 
 export const {
+    useGetBookingsQuery,
     useGetMeMutation,
+    useGetResourceQuery,
+    useGetUserQuery,
     useLoginMutation,
     useLogoutMutation,
     useResetEnvironmentQuery,

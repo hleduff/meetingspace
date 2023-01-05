@@ -1,0 +1,6 @@
+.root {
+    background-color: var(--white);
+    padding: 1.6rem;
+    border-radius: .8rem;
+    color: var(--medium-grey);
+}

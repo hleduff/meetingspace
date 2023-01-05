@@ -1,6 +1,6 @@
-export interface IGenericResponse {
+export interface IGeneric {
     success: boolean;
-    data: string;
+    data: string | object;
 };
 
 export interface IToken {
@@ -8,12 +8,11 @@ export interface IToken {
     expirationDate: string;
 };
 
-export interface ILoginResponse {
-    success: boolean;
+export interface ILogin extends IGeneric {
     data: IToken;
 };
 
-export interface ILogoutResponse {
+export interface ILogout {
     success: boolean;
     message: string;
 };
@@ -23,7 +22,29 @@ export interface IUser {
     name: string;
 };
 
-export interface IGetMeResponse {
-    success: boolean;
+export interface IGetMe extends IGeneric {
     data: IUser;
+};
+
+export interface IResource {
+    id: string;
+    name: string;
+    minimumBookingDuration: number;
+    maximumBookingDuration: number;
+    bookingDurationStep: number;
+};
+
+export interface IResource extends IGeneric {
+    data: IResource;
+};
+export interface IBooking {
+    id: string;
+    start: string;
+    end: string;
+    name: string;
+    userId: string;
+};
+
+export interface IBookings extends IGeneric {
+    data: IBooking[];
 };
