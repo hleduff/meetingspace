@@ -5,6 +5,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../../app/store';
 
 import type {
+    IBookingRequest,
     IBookings,
     IGeneric,
     IGetMe,
@@ -58,6 +59,13 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReAuth,
     endpoints: (builder) => ({
+        createBooking: builder.mutation<IGeneric, IBookingRequest>({
+            query: (booking) => ({
+                url: '/bookings',
+                method: 'POST',
+                body: booking,
+            })
+        }),
         getBookings: builder.query<IBookings, void>({
             query: () => ({ url: '/bookings', method: 'GET' }),
         }),
@@ -83,6 +91,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+    useCreateBookingMutation,
     useGetBookingsQuery,
     useGetMeMutation,
     useGetResourceQuery,

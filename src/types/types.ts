@@ -48,3 +48,8 @@ export interface IBooking {
 export interface IBookings extends IGeneric {
     data: IBooking[];
 };
+
+export interface IBookingRequest {
+    name: string;
+    duration: number;
+};
