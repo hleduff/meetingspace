@@ -1,8 +1,7 @@
-import { BookingList, Greet, Resource } from '../index';
+import { BookingList, Resource } from '../index';
 
 export const Dashboard = () => (
     <div>
-        <Greet />
         <Resource />
         <BookingList />
     </div>
