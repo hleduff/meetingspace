@@ -1,8 +1,34 @@
-import { BookingList, Resource } from '../index';
+import { useEffect, useState } from 'react';
 
-export const Dashboard = () => (
-    <div>
-        <Resource />
-        <BookingList />
-    </div>
-);
+import { useGetBookingsQuery } from '../../features/api/apiSlice';
+import { IBooking } from '../../types/types';
+import { Booking, Resource } from '../';
+
+import styles from './style.module.css';
+
+export const Dashboard = () => {
+    const [currentUser, setCurrentUser] = useState<string | null>();
+    const { data: bookings } = useGetBookingsQuery();
+
+    const currentTime = new Date().getTime();
+
+    useEffect(() => {
+        if (bookings) {
+            for (const booking of bookings.data) {
+                if (currentTime >= new Date(booking.start).getTime() && currentTime <= new Date(booking.end).getTime()) {
+                    setCurrentUser(booking.userId);
+                }
+            }
+        }
+    }, [currentTime]);
+
+    return (
+        <div className={styles.dashboard}>
+            <Resource currentUser={currentUser} />
+            <div className={styles.bookingsList}>
+                Schedule:
+                {bookings?.data.map((booking: IBooking) => <Booking key={booking.id} booking={booking} />)}
+            </div>
+        </div>
+    );
+};

@@ -1,15 +1,18 @@
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useState } from 'react';
-import { useCreateBookingMutation, useGetResourceQuery } from '../../features/api/apiSlice';
+
+import { useCreateBookingMutation, useGetResourceQuery, useGetUserQuery } from '../../features/api/apiSlice';
 import { checkDuration } from '../../utils/utils';
 
 import styles from './style.module.css';
 
-// displays the available room
-export const Resource = () => {
+export const Resource = ({ currentUser }: { currentUser?: string | null }) => {
     const [duration, setDuration] = useState(0);
     const [name, setName] = useState('');
+
     const { data: resource } = useGetResourceQuery();
-    const [createBooking, { isLoading }] = useCreateBookingMutation();
+    const [createBooking, { isLoading: creatingBooking }] = useCreateBookingMutation();
+    const { data: user } = useGetUserQuery(currentUser ?? skipToken);
 
     const durationStep = resource?.data.bookingDurationStep as number;
     const maxDuration = resource?.data.maximumBookingDuration as number;
@@ -20,8 +23,7 @@ export const Resource = () => {
     };
 
     const handleSubmit = async () => {
-
-        if (isLoading) return;
+        if (creatingBooking) return;
         if (isDurationValid(duration) && name) {
             try {
                 await createBooking({ duration, name }).unwrap();
@@ -36,13 +38,22 @@ export const Resource = () => {
         setDuration(dur);
     };
 
-    return (
-        <div className={styles.root}>
-            <p>Book the <b className="highlight">{resource?.data.name}</b> room</p>
+    let content;
+
+    if (user) {
+        content = <p>
+            <b className="highlight">{resource?.data.name}</b> is currently booked by <b className="highlight">{user.data.name}</b>.
+        </p>
+    } else {
+        content = <>
+            <p>
+                Book the <b className="highlight">{resource?.data.name}</b> room:
+            </p>
             <div className={styles.form}>
                 <div className={styles.formLine}>
                     <label className={styles.label} htmlFor="duration">Duration:</label>
                     <input
+                        disabled={!!user}
                         id="duration"
                         max={maxDuration}
                         min={minDuration}
@@ -55,14 +66,26 @@ export const Resource = () => {
                 </div>
                 <div className={styles.formLine}>
                     <label className={styles.label} htmlFor="name">Meeting name:</label>
-                    <input type="text" id="name" name="name" onChange={(e) => setName(e.target.value)} />
+                    <input
+                        disabled={!!user}
+                        id="name"
+                        name="name"
+                        onChange={(e) => setName(e.target.value)}
+                        type="text"
+                    />
                 </div>
                 <div className={styles.formLine}>
-                    <button type="button" onClick={handleSubmit}>
+                    <button type="button" disabled={!!user || creatingBooking} onClick={handleSubmit}>
                         Book
                     </button>
                 </div>
             </div>
+        </>
+    }
+
+    return (
+        <div className={styles.root}>
+            {content}
         </div>
     );
 };
