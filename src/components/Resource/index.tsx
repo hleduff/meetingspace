@@ -1,5 +1,5 @@
-import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useState } from 'react';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 import { useCreateBookingMutation, useGetResourceQuery, useGetUserQuery } from '../../features/api/apiSlice';
 import { checkDuration } from '../../utils';
@@ -75,7 +75,7 @@ export const Resource = ({ currentUser }: { currentUser?: string | null }) => {
                         type="text"
                     />
                 </div>
-                <div className={styles.formLine}>
+                <div className={`${styles.formLine} ${styles.formLine}`}>
                     <button type="button" disabled={!!user || creatingBooking} onClick={handleSubmit}>
                         Book
                     </button>
