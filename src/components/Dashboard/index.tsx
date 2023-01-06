@@ -25,9 +25,11 @@ export const Dashboard = () => {
     return (
         <div className={styles.dashboard}>
             <Resource currentUser={currentUser} />
-            <div className={styles.bookingsList}>
-                Schedule:
-                {bookings?.data.map((booking: IBooking) => <Booking key={booking.id} booking={booking} />)}
+            <div>
+                <p className="regText">Schedule:</p>
+                <div className={styles.bookingsList}>
+                    {bookings?.data.map((booking: IBooking) => <Booking key={booking.id} booking={booking} />)}
+                </div>
             </div>
         </div>
     );
