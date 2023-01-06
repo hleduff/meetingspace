@@ -1,6 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { baseQueryWithReAuth } from './config';
 import type {
     IBookingRequest,
     IBookings,
@@ -10,6 +9,7 @@ import type {
     ILogout,
     IResource,
 } from '../../types';
+import { baseQueryWithReAuth } from './config';
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReAuth,
