@@ -58,16 +58,19 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReAuth,
+    tagTypes: ['Bookings'],
     endpoints: (builder) => ({
         createBooking: builder.mutation<IGeneric, IBookingRequest>({
             query: (booking) => ({
                 url: '/bookings',
                 method: 'POST',
                 body: booking,
-            })
+            }),
+            invalidatesTags: ['Bookings'],
         }),
         getBookings: builder.query<IBookings, void>({
             query: () => ({ url: '/bookings', method: 'GET' }),
+            providesTags: ['Bookings'],
         }),
         getMe: builder.mutation<IGetMe, void>({
             query: () => ({ url: '/me', method: 'GET' }),
