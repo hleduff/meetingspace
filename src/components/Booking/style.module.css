@@ -1,11 +1,11 @@
-.root {
+.booking {
     background-color: var(--white);
     padding: 1.6rem;
     border-radius: .8rem;
     color: var(--medium-grey);
 }
 
-.root p:not(:first-child):not(:last-child) {
+.booking p:not(:first-child):not(:last-child) {
     margin: .8rem 0;
 }
 

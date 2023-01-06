@@ -12,7 +12,7 @@ export const Booking = ({ booking } : { booking: IBooking }) => {
 
     let content = null;
 
-    if (booking) content = (<div className={styles.root}>
+    if (booking) content = (<div className={styles.booking}>
         <div className={styles.header}>
             <p className={styles.time}><b>{localTime(booking.start)} - {localTime(booking.end)}</b></p>
             {isOccupied && <span className={styles.busy}>In progress</span>}

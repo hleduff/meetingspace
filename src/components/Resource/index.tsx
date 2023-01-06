@@ -84,7 +84,7 @@ export const Resource = ({ currentUser }: { currentUser?: string | null }) => {
     }
 
     return (
-        <div className={styles.root}>
+        <div className={styles.resource}>
             {content}
         </div>
     );
