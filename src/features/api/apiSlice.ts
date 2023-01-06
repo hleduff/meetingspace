@@ -89,6 +89,7 @@ export const apiSlice = createApi({
         }),
         resetEnvironment: builder.mutation<IGeneric, void>({
             query: () => ({ url: '/reset', method: 'GET' }),
+            invalidatesTags: ['Bookings'],
         }),
     }),
 });
