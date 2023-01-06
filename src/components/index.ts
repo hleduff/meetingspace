@@ -1,5 +1,4 @@
 export * from './Booking';
-export * from './BookingList';
 export * from './Dashboard';
 export * from './Header';
 export * from './Layout';
