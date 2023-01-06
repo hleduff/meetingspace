@@ -1,5 +1,5 @@
 import { useGetBookingsQuery } from '../../features/api/apiSlice';
-import { IBooking } from '../../types/types';
+import { IBooking } from '../../types';
 import { Booking } from '../Booking';
 
 import styles from './style.module.css';

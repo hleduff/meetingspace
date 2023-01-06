@@ -1,6 +1,6 @@
 import { useGetUserQuery } from '../../features/api/apiSlice';
-import { IBooking } from '../../types/types';
-import { localTime } from '../../utils/utils';
+import { IBooking } from '../../types';
+import { localTime } from '../../utils';
 
 import styles from './style.module.css';
 

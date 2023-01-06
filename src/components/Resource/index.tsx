@@ -2,7 +2,7 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useState } from 'react';
 
 import { useCreateBookingMutation, useGetResourceQuery, useGetUserQuery } from '../../features/api/apiSlice';
-import { checkDuration } from '../../utils/utils';
+import { checkDuration } from '../../utils';
 
 import styles from './style.module.css';
 
