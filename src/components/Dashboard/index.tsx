@@ -26,7 +26,7 @@ export const Dashboard = () => {
         <div className={styles.dashboard}>
             <Resource currentUser={currentUser} />
             <div>
-                <p className="regText">Schedule:</p>
+                <h2 className="lvl1-title">Schedule:</h2>
                 <div className={styles.bookingsList}>
                     {bookings?.data.map((booking: IBooking) => <Booking key={booking.id} booking={booking} />)}
                 </div>

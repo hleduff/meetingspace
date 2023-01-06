@@ -24,3 +24,9 @@
     align-items: center;
     gap: 1.6rem;
 }
+
+@media (prefers-color-scheme: light) {
+    .user {
+        color: var(--white);
+    }
+}

@@ -66,6 +66,17 @@ ul {
     color: var(--main);
 }
 
+.lvl1-title {
+    margin: 0 0 1.6rem;
+    font-size: initial;
+    font-weight: 600;
+}
+
+.regText {
+    line-height: 1.4;
+    margin-bottom: 1.6rem;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: var(--medium-grey);

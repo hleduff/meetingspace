@@ -1,8 +1,6 @@
 import { useAppSelector } from './app/store';
 import { Dashboard, Layout } from './components';
 
-import './App.css';
-
 const App = () => {
     const authToken = useAppSelector((state) => state.auth.token);
 

@@ -41,14 +41,14 @@ export const Resource = ({ currentUser }: { currentUser?: string | null }) => {
     let content;
 
     if (user) {
-        content = <p className="regText">
+        content = <h2 className="lvl1-title">
             <b className="highlight">{resource?.data.name}</b> is currently booked by <b className="highlight">{user.data.name}</b>.
-        </p>
+        </h2>
     } else {
         content = <>
-            <p className="regText">
+            <h2 className="lvl1-title">
                 Book the <b className="highlight">{resource?.data.name}</b> room:
-            </p>
+            </h2>
             <div className={styles.form}>
                 <div className={styles.formLine}>
                     <label className={styles.label} htmlFor="duration">Duration:</label>
