@@ -1,5 +1,5 @@
 import { useAppSelector } from './app/store';
-import { Dashboard, Layout } from './components';
+import { Dashboard, Layout, Text } from './components';
 
 const App = () => {
     const authToken = useAppSelector((state) => state.auth.token);
@@ -8,8 +8,10 @@ const App = () => {
 
     if (authToken) content = <Dashboard />
     else content = (
-        <p className="regText">You must be logged in to use this app!<br />
-        Please click on the button at the top right of this screen.</p>
+        <>
+            <Text>You must be logged in to use this app!</Text>
+            <Text>Please click on the button at the top right of this screen.</Text>
+        </>
     );
 
     return (

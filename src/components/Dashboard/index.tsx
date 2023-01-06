@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useGetBookingsQuery } from '../../features/api/apiSlice';
 import { IBooking } from '../../types';
-import { Booking, Resource } from '../';
+import { Booking, Resource, Title } from '../';
 
 import styles from './style.module.css';
 
@@ -26,7 +26,7 @@ export const Dashboard = () => {
         <div className={styles.dashboard}>
             <Resource currentUser={currentUser} />
             <div>
-                <h2 className="lvl1-title">Schedule:</h2>
+                <Title>Schedule:</Title>
                 <div className={styles.bookingsList}>
                     {bookings?.data.map((booking: IBooking) => <Booking key={booking.id} booking={booking} />)}
                 </div>

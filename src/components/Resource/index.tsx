@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { useCreateBookingMutation, useGetResourceQuery, useGetUserQuery } from '../../features/api/apiSlice';
 import { checkDuration } from '../../utils';
+import { Title } from '../Title';
 
 import styles from './style.module.css';
 
@@ -41,14 +42,14 @@ export const Resource = ({ currentUser }: { currentUser?: string | null }) => {
     let content;
 
     if (user) {
-        content = <h2 className="lvl1-title">
+        content = <Title>
             <b className="highlight">{resource?.data.name}</b> is currently booked by <b className="highlight">{user.data.name}</b>.
-        </h2>
+        </Title>
     } else {
         content = <>
-            <h2 className="lvl1-title">
+            <Title>
                 Book the <b className="highlight">{resource?.data.name}</b> room:
-            </h2>
+            </Title>
             <div className={styles.form}>
                 <div className={styles.formLine}>
                     <label className={styles.label} htmlFor="duration">Duration:</label>
