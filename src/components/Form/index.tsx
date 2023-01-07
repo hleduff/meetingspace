@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { useAppSelector } from '../../app/store';
 
 import { useCreateBookingMutation } from '../../features/api/apiSlice';
@@ -25,7 +25,9 @@ export const Form = () => {
         return checkDuration(durationStep, maxDuration, minDuration, value);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         if (creatingBooking) return;
         if (isDurationValid(bookingData.duration) && bookingData.name) {
             try {
@@ -42,18 +44,20 @@ export const Form = () => {
     };
 
     const handleChangeDuration = (e: ChangeEvent<HTMLInputElement>) => {
-        const dur = parseInt(e.target.value);
-        setBookingData((prev) => ({
-            ...prev,
-            duration: dur,
-        }));
+        if (e.target.value) {
+            setBookingData((prev) => ({
+                ...prev,
+                duration: parseInt(e.target.value),
+            }));
+        }
     };
 
     return (
-        <div className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formLine}>
                 <label className={styles.label} htmlFor="duration">Duration:</label>
                 <input
+                    className="input"
                     id="duration"
                     max={timeRemaining ? timeRemaining : maxDuration}
                     min={minDuration}
@@ -67,6 +71,7 @@ export const Form = () => {
             <div className={styles.formLine}>
                 <label className={styles.label} htmlFor="name">Meeting name:</label>
                 <input
+                    className="input"
                     id="name"
                     name="name"
                     onChange={(e) => setBookingData((prev) => ({
@@ -78,10 +83,10 @@ export const Form = () => {
                 />
             </div>
             <div className={`${styles.formLine} ${styles.formLine}`}>
-                <button type="button" disabled={creatingBooking} onClick={handleSubmit}>
+                <button className="btn" disabled={creatingBooking} type="submit">
                     Book
                 </button>
             </div>
-        </div>
+        </form>
     );
 };

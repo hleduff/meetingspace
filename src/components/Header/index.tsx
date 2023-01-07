@@ -55,9 +55,10 @@ export const Header = () => {
             <div className={styles.menu}>
                 {!authToken &&
                     <button
-                        type="button"
-                        onClick={handleLogin}
+                        className="btn"
                         disabled={loginLoading}
+                        onClick={handleLogin}
+                        type="button"
                     >
                         Login
                     </button>
@@ -68,17 +69,19 @@ export const Header = () => {
                             {userName}
                         </div>
                         <button
-                            type="button"
-                            onClick={handleLogout}
+                            className="btn"
                             disabled={logoutLoading}
+                            onClick={handleLogout}
+                            type="button"
                         >
                             Logout
                         </button>
                     </>
                 )}
                 <button
-                    type="button"
+                    className="btn"
                     onClick={handleReset}
+                    type="button"
                 >
                     Reset
                 </button>
