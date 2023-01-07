@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { apiSlice } from '../features/api/apiSlice';
 import authReducer from '../features/auth/authSlice';
+import resourceReducer from '../features/resource/resourceSlice';
 import userReducer from '../features/user/userSlice';
 
 const persistConfig = {
@@ -25,6 +26,7 @@ const persistConfig = {
 const reducers = {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authReducer,
+    resource: resourceReducer,
     user: userReducer,
 };
 
@@ -43,5 +45,4 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
