@@ -13,7 +13,7 @@ import { baseQueryWithReAuth } from './config';
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReAuth,
-    tagTypes: ['Bookings'],
+    tagTypes: ['Bookings', 'Resource'],
     endpoints: (builder) => ({
         createBooking: builder.mutation<IGeneric, IBookingRequest>({
             query: (booking) => ({
@@ -22,6 +22,13 @@ export const apiSlice = createApi({
                 body: booking,
             }),
             invalidatesTags: ['Bookings'],
+        }),
+        cancelBooking: builder.mutation<IGeneric, string>({
+            query: (id) => ({
+                url: `/bookings/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Bookings', 'Resource'],
         }),
         getBookings: builder.query<IBookings, void>({
             query: () => ({ url: '/bookings', method: 'GET' }),
@@ -32,6 +39,7 @@ export const apiSlice = createApi({
         }),
         getResource: builder.query<IResource, void>({
             query: () => ({ url: '/resource', method: 'GET' }),
+            providesTags: ['Resource'],
         }),
         getUser: builder.query<IGetUser, string>({
             query: (id) => ({ url: `/users/${id}`, method: 'GET' }),
@@ -51,6 +59,7 @@ export const apiSlice = createApi({
 
 export const {
     useCreateBookingMutation,
+    useCancelBookingMutation,
     useGetBookingsQuery,
     useGetMeMutation,
     useGetResourceQuery,

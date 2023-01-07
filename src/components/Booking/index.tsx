@@ -2,21 +2,32 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../app/store';
-import { useGetUserQuery } from '../../features/api/apiSlice';
-import { setCurrentMeeting, setNextMeeting } from '../../features/resource/resourceSlice';
-import { IBooking } from '../../types';
+import { useCancelBookingMutation, useGetUserQuery } from '../../features/api/apiSlice';
+import { resetResource, setCurrentMeeting, setNextMeeting } from '../../features/resource/resourceSlice';
+import { IBooking, IBookingRequest } from '../../types';
 import { localTime } from '../../utils';
 
 import styles from './style.module.css';
 
 export const Booking = ({ booking } : { booking: IBooking }) => {
     const dispatch = useDispatch();
-    const { data: user } = useGetUserQuery(booking.userId);
+    const { data: bookingOwner } = useGetUserQuery(booking.userId);
+    const [cancelBooking, { isLoading }] = useCancelBookingMutation();
 
+    const loggedInUser = useAppSelector((state) => state.user.id);
     const currentMeeting = useAppSelector((state) => state.resource.currentMeeting);
     const resourceData = useAppSelector((state) => state.resource.resourceData);
 
-    const inProgress = typeof currentMeeting.userId === 'string' && currentMeeting.userId === user?.data.id;
+    const inProgress = typeof currentMeeting.userId === 'string' && currentMeeting.userId === bookingOwner?.data.id;
+
+    const handleClick = async (id: string) => {
+        try {
+            await cancelBooking(id);
+            dispatch(resetResource());
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     useEffect(() => {
         const bookingEnd = new Date(booking.end).getTime();
@@ -44,7 +55,19 @@ export const Booking = ({ booking } : { booking: IBooking }) => {
             {inProgress && <span className={styles.busy}>In progress</span>}
         </div>
         <p>{booking.name}</p>
-        <p className={styles.user}>{user?.data?.name}</p>
+        <div className={styles.footer}>
+            <p className={styles.user}>{bookingOwner?.data?.name}</p>
+            {loggedInUser === booking.userId && (
+                <button
+                    className="btn warning"
+                    type="button"
+                    onClick={() => handleClick(booking.id)}
+                    disabled={isLoading}
+                >
+                    Cancel
+                </button>
+            )}
+        </div>
     </div>);
 
     return content;

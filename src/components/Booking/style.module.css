@@ -35,6 +35,18 @@
     content: "";
 }
 
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer :global(.btn) {
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    font-size: 1.4rem;
+}
+
 .user {
     color: var(--main);
     font-size: 1.4rem;
