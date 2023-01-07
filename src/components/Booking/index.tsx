@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../app/store';
 import { useGetUserQuery } from '../../features/api/apiSlice';
-import { setCurrentMeeting } from '../../features/resource/resourceSlice';
+import { setCurrentMeeting, setNextMeeting } from '../../features/resource/resourceSlice';
 import { IBooking } from '../../types';
 import { localTime } from '../../utils';
 
@@ -14,12 +14,25 @@ export const Booking = ({ booking } : { booking: IBooking }) => {
     const { data: user } = useGetUserQuery(booking.userId);
 
     const currentMeeting = useAppSelector((state) => state.resource.currentMeeting);
+    const resourceData = useAppSelector((state) => state.resource.resourceData);
+
     const inProgress = typeof currentMeeting.userId === 'string' && currentMeeting.userId === user?.data.id;
 
     useEffect(() => {
+        const bookingEnd = new Date(booking.end).getTime();
+        const bookingStart = new Date(booking.start).getTime();
         const currentTime = new Date().getTime();
-        if (currentTime >= new Date(booking.start).getTime() && currentTime <= new Date(booking.end).getTime()) {
+
+        // look for a meeting in progress
+        if (currentTime >= bookingStart && currentTime <= bookingEnd) {
             dispatch(setCurrentMeeting({ userId: booking.userId }));
+        // then among the other meetings… 
+        } else if (currentTime < bookingEnd) {
+            // … look for a meeting starting in less than maxDuration time
+            const timeToNextMeeting = Math.floor((bookingStart - currentTime) / (1000 * 60));
+            if (timeToNextMeeting <= resourceData.maxDuration) {
+                dispatch(setNextMeeting({ timeRemaining: timeToNextMeeting }));
+            }
         }
     }, [booking]);
 

@@ -17,7 +17,9 @@ export const Form = () => {
         durationStep,
         maxDuration,
         minDuration
-    } } = useAppSelector((state) => state.resource);
+    },
+        nextMeeting: { timeRemaining },    
+    } = useAppSelector((state) => state.resource);
 
     const isDurationValid = (value: number): boolean => {
         return checkDuration(durationStep, maxDuration, minDuration, value);
@@ -53,7 +55,7 @@ export const Form = () => {
                 <label className={styles.label} htmlFor="duration">Duration:</label>
                 <input
                     id="duration"
-                    max={maxDuration}
+                    max={timeRemaining ? timeRemaining : maxDuration}
                     min={minDuration}
                     name="duration"
                     onChange={handleChangeDuration}
