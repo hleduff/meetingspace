@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-type IUserState = {
+import { apiSlice } from '../api/apiSlice';
+
+const origState: {
     id: string | null,
     name: string | null,
-};
-
-const initialState: IUserState = {
+} = {
     id: null,
     name: null,
 };
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState: { id: null, name: null } as IUserState,
+    initialState: origState,
     reducers: {
-        resetUser: () => initialState,
+        resetUser: () => origState,
         setUser: (
             state,
             {
@@ -25,6 +25,12 @@ export const userSlice = createSlice({
             state.id = id;
             state.name = name;
         },
+    },
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            apiSlice.endpoints.logout.matchFulfilled,
+                () => origState,
+        )
     },
 });
 

@@ -1,51 +1,70 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { RootState } from '../../app/store';
-
 import type {
-    IGenericResponse,
-    IGetMeResponse,
-    ILoginResponse,
-    ILogoutResponse,
-} from '../../types/types';
-
-const URL_API = import.meta.env.VITE_URL_API;
+    IBookingRequest,
+    IBookings,
+    IGeneric,
+    IGetUser,
+    ILogin,
+    ILogout,
+    IResource,
+} from '../../types';
+import { baseQueryWithReAuth } from './config';
 
 export const apiSlice = createApi({
-    baseQuery: fetchBaseQuery({
-        baseUrl: URL_API,
-        prepareHeaders: (headers, { getState, endpoint }) => {
-            // skip Bearer Token setting for both these endpoints
-            if (['login', 'resetEnvironment'].includes(endpoint)) return;
-
-            const token = (getState() as RootState).auth.token;
-
-            if (token) {
-                headers.set('Authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
+    baseQuery: baseQueryWithReAuth,
+    tagTypes: ['Bookings', 'Resource'],
     endpoints: (builder) => ({
-        resetEnvironment: builder.query<IGenericResponse, void>({
-            query: () => ({ url: '/reset', method: 'GET' }),
+        createBooking: builder.mutation<IGeneric, IBookingRequest>({
+            query: (booking) => ({
+                url: '/bookings',
+                method: 'POST',
+                body: booking,
+            }),
+            invalidatesTags: ['Bookings'],
         }),
-        login: builder.mutation<ILoginResponse, void>({
+        cancelBooking: builder.mutation<IGeneric, string>({
+            query: (id) => ({
+                url: `/bookings/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Bookings', 'Resource'],
+        }),
+        getBookings: builder.query<IBookings, void>({
+            query: () => ({ url: '/bookings', method: 'GET' }),
+            providesTags: ['Bookings'],
+        }),
+        getMe: builder.mutation<IGetUser, void>({
+            query: () => ({ url: '/me', method: 'GET' }),
+        }),
+        getResource: builder.query<IResource, void>({
+            query: () => ({ url: '/resource', method: 'GET' }),
+            providesTags: ['Resource'],
+        }),
+        getUser: builder.query<IGetUser, string>({
+            query: (id) => ({ url: `/users/${id}`, method: 'GET' }),
+        }),
+        login: builder.mutation<ILogin, void>({
             query: () => ({ url: '/login', method: 'GET' }),
         }),
-        logout: builder.mutation<ILogoutResponse, void>({
+        logout: builder.mutation<ILogout, void>({
             query: () => ({ url: '/logout', method: 'GET' }),
         }),
-        getMe: builder.mutation<IGetMeResponse, void>({
-            query: () => ({ url: '/me', method: 'GET' }),
+        resetEnvironment: builder.mutation<IGeneric, void>({
+            query: () => ({ url: '/reset', method: 'GET' }),
+            invalidatesTags: ['Bookings'],
         }),
     }),
 });
 
 export const {
+    useCreateBookingMutation,
+    useCancelBookingMutation,
+    useGetBookingsQuery,
     useGetMeMutation,
+    useGetResourceQuery,
+    useGetUserQuery,
     useLoginMutation,
     useLogoutMutation,
-    useResetEnvironmentQuery,
+    useResetEnvironmentMutation,
 } = apiSlice;

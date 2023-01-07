@@ -1,0 +1,61 @@
+.booking {
+    background-color: var(--white);
+    padding: 1.6rem;
+    border-radius: .8rem;
+    color: var(--medium-grey);
+}
+
+.booking p:not(:first-child):not(:last-child) {
+    margin: .8rem 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .8rem;
+}
+
+.header .time {
+    margin-bottom: 0;
+}
+
+.busy {
+    display: flex;
+    align-items: center;
+}
+
+.busy::before {
+    display: block;
+    width: .8rem;
+    height: .8rem;
+    background-color: var(--red);
+    border-radius: 50%;
+    margin-right: .8rem;
+    content: "";
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer :global(.btn) {
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    font-size: 1.4rem;
+}
+
+.user {
+    color: var(--main);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: light) {
+    .booking {
+        color: var(--white);
+        background-color: var(--medium-grey);
+    }
+}

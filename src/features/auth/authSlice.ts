@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-type IAuthState = {
+import { apiSlice } from '../api/apiSlice';
+
+const origState: {
     token: string | null;
     expirationDate: string | null;
-};
-
-const initialState: IAuthState = {
+} = {
     token: null,
     expirationDate: null,
 };
 
 export const authSlice = createSlice({
     name: 'auth',
-    initialState: { token: null, expirationDate: null } as IAuthState,
+    initialState: origState,
     reducers: {
-        resetAuth: () => initialState,
+        loggedOut: () => origState,
         setAuth: (
             state,
             {
@@ -26,8 +26,14 @@ export const authSlice = createSlice({
             state.expirationDate = expirationDate;
         },
     },
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            apiSlice.endpoints.logout.matchFulfilled,
+                () => origState,
+        )
+    },
 });
 
-export const { resetAuth, setAuth } = authSlice.actions;
+export const { loggedOut, setAuth } = authSlice.actions;
 
 export default authSlice.reducer;

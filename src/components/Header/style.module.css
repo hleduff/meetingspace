@@ -19,12 +19,14 @@
     font-weight: 600;
 }
 
-.highlight {
-    color: var(--main);
-}
-
-.user {
+.menu {
     display: flex;
     align-items: center;
     gap: 1.6rem;
+}
+
+@media (prefers-color-scheme: light) {
+    .user {
+        color: var(--white);
+    }
 }
