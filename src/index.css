@@ -83,12 +83,14 @@ ul {
 }
 
 /* button styles */
+/* primary btn */
 .btn {
     padding: .4rem 1.6rem;
     border: 0 none;
     border-radius: .4rem;
     background-color: rgba(32, 157, 224, .5);
     color: var(--white);
+    font-weight: 600;
     transition: all .2s ease;
 }
 
@@ -107,6 +109,28 @@ ul {
 
 .btn:disabled {
     background-color: rgba(32, 157, 224, .1);
+}
+
+/* "warning" btn */
+.btn.warning {
+    background-color: rgba(255, 1, 0, .9);
+}
+
+.btn.warning:hover {
+    background-color: rgba(255, 1, 0, .8);
+}
+
+.btn.warning:focus-visible {
+    background-color: rgba(255, 1, 0, .8);
+    outline: solid .2rem var(--main);
+}
+
+.btn.warning:active {
+    background-color: rgba(255, 1, 0, .9);
+}
+
+.btn.warning:disabled {
+    background-color: rgba(255, 1, 0, .1);
 }
 
 /* light mode styles */
