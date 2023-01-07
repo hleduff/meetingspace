@@ -22,7 +22,7 @@ export interface IUser {
     name: string;
 };
 
-export interface IGetMe extends IGeneric {
+export interface IGetUser extends IGeneric {
     data: IUser;
 };
 

@@ -4,7 +4,7 @@ import type {
     IBookingRequest,
     IBookings,
     IGeneric,
-    IGetMe,
+    IGetUser,
     ILogin,
     ILogout,
     IResource,
@@ -27,13 +27,13 @@ export const apiSlice = createApi({
             query: () => ({ url: '/bookings', method: 'GET' }),
             providesTags: ['Bookings'],
         }),
-        getMe: builder.mutation<IGetMe, void>({
+        getMe: builder.mutation<IGetUser, void>({
             query: () => ({ url: '/me', method: 'GET' }),
         }),
         getResource: builder.query<IResource, void>({
             query: () => ({ url: '/resource', method: 'GET' }),
         }),
-        getUser: builder.query<IGetMe, string>({
+        getUser: builder.query<IGetUser, string>({
             query: (id) => ({ url: `/users/${id}`, method: 'GET' }),
         }),
         login: builder.mutation<ILogin, void>({
