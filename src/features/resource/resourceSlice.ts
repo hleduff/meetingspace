@@ -33,6 +33,7 @@ export const resourceSlice = createSlice({
     name: 'resource',
     initialState: origState,
     reducers: {
+        resetResource: () => origState,
         setCurrentMeeting: (
             state,
             {
@@ -63,6 +64,6 @@ export const resourceSlice = createSlice({
     },
 });
 
-export const { setCurrentMeeting, setNextMeeting, setResourceData } = resourceSlice.actions;
+export const { resetResource, setCurrentMeeting, setNextMeeting, setResourceData } = resourceSlice.actions;
 
 export default resourceSlice.reducer;

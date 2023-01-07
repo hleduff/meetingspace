@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/store';
 import { useGetMeMutation, useLoginMutation, useLogoutMutation, useResetEnvironmentMutation } from '../../features/api/apiSlice';
 import { setAuth } from '../../features/auth/authSlice';
+import { resetResource } from '../../features/resource/resourceSlice';
 import { setUser } from '../../features/user/userSlice';
 
 import styles from './style.module.css';
@@ -32,6 +33,7 @@ export const Header = () => {
     const handleLogout = async () => {
         try {
             await logout();
+            dispatch(resetResource());
         } catch (err) {
             console.error(err);
         }
