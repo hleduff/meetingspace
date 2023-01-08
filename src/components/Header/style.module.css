@@ -30,3 +30,59 @@
         color: var(--white);
     }
 }
+
+@media (max-width: 599px) {
+    .closeButton:only-child {
+        margin-left: auto;
+    }
+
+    .closeButton svg,
+    .menuButton svg {
+        display: block;
+    }
+
+    .menuHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .menuWrapper {
+        overflow: hidden;
+        overflow-y: scroll;
+        z-index: 10;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        display: flex;
+        justify-content: flex-end;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(27, 38, 52, .7);
+        transition: right .4s ease-in-out;
+    }
+
+    .menuContainer {
+        box-sizing: border-box;
+        width: 320px;
+        background: var(--dark-grey);
+        padding: 1.6rem;
+    }
+
+    .menuWrapper.open {
+        right: 0;
+    }
+
+    .menu {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 600px) {
+    .menuButton,
+    .menuHeader {
+        display: none;
+    }
+}
