@@ -5,7 +5,7 @@ import { RootState } from '../../app/store';
 import { loggedOut } from '../auth/authSlice';
 import { resetUser } from '../user/userSlice';
 
-const URL_API = import.meta.env.VITE_URL_API;
+const URL_API = import.meta.env.VITE_URL_API as string;
 
 /**
  * Once there is a token in the state, use it for every subsequent request.

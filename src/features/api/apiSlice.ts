@@ -7,7 +7,7 @@ import type {
     IGetUser,
     ILogin,
     ILogout,
-    IResource,
+    IResourceResponse,
 } from '../../types';
 import { baseQueryWithReAuth } from './config';
 
@@ -37,7 +37,7 @@ export const apiSlice = createApi({
         getMe: builder.mutation<IGetUser, void>({
             query: () => ({ url: '/me', method: 'GET' }),
         }),
-        getResource: builder.query<IResource, void>({
+        getResource: builder.query<IResourceResponse, void>({
             query: () => ({ url: '/resource', method: 'GET' }),
             providesTags: ['Resource'],
         }),

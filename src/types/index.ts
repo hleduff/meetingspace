@@ -34,7 +34,7 @@ export interface IResource {
     bookingDurationStep: number;
 }
 
-export interface IResource extends IGeneric {
+export interface IResourceResponse extends IGeneric {
     data: IResource;
 }
 export interface IBooking {
