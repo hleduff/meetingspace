@@ -78,6 +78,11 @@ ul {
     transition: outline .2s ease;
 }
 
+.input[type="number"]::-webkit-inner-spin-button,
+.input[type="number"]::-webkit-outer-spin-button {
+   opacity: 1;
+}
+
 .input:focus-visible {
     outline: solid .2rem var(--main);
 }
