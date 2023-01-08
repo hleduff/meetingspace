@@ -1,18 +1,24 @@
 .form {
     display: inline-flex;
+    align-items: flex-start;
     flex-direction: column;
 }
 
 .formLine {
+    max-width: calc(320px - 3.2rem);
+    display: flex;
+    align-items: center;
+    gap: .8rem;
     margin: .8rem 0;
 }
 
 .label {
-    display: inline-block;
+    flex-shrink: 0;
     width: 10rem;
-    margin-right: .8rem;
 }
 
 .btnLine {
-    align-self: flex-end;
+    width: 100%;
+    text-align: right;
+    margin: .8rem 0;
 }

@@ -31,6 +31,13 @@
     }
 }
 
+@media screen and (max-width: 320px) {
+    .header {
+        padding-right: .8rem;
+        padding-left: .8rem;
+    }
+}
+
 @media (max-width: 599px) {
     .closeButton:only-child {
         margin-left: auto;
