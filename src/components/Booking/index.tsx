@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/store';
 import { useCancelBookingMutation, useGetUserQuery } from '../../features/api/apiSlice';
 import { resetResource, setCurrentMeeting, setNextMeeting } from '../../features/resource/resourceSlice';
-import { IBooking, IBookingRequest } from '../../types';
+import { IBooking } from '../../types';
 import { localTime } from '../../utils';
 
 import styles from './style.module.css';
 
-export const Booking = ({ booking } : { booking: IBooking }) => {
+export const Booking = ({ booking }: { booking: IBooking }) => {
     const dispatch = useDispatch();
     const { data: bookingOwner } = useGetUserQuery(booking.userId);
     const [cancelBooking, { isLoading }] = useCancelBookingMutation();
@@ -41,6 +41,7 @@ export const Booking = ({ booking } : { booking: IBooking }) => {
         } else if (currentTime < bookingEnd) {
             // … look for a meeting starting in less than maxDuration time
             const timeToNextMeeting = Math.floor((bookingStart - currentTime) / (1000 * 60));
+
             if (timeToNextMeeting <= resourceData.maxDuration) {
                 dispatch(setNextMeeting({ timeRemaining: timeToNextMeeting }));
             }
@@ -49,26 +50,28 @@ export const Booking = ({ booking } : { booking: IBooking }) => {
 
     let content = null;
 
-    if (booking) content = (<div className={styles.booking}>
-        <div className={styles.header}>
-            <p className={styles.time}><b>{localTime(booking.start)} - {localTime(booking.end)}</b></p>
-            {inProgress && <span className={styles.busy}>In progress</span>}
-        </div>
-        <p>{booking.name}</p>
-        <div className={styles.footer}>
-            <p className={styles.user}>{bookingOwner?.data?.name}</p>
-            {loggedInUser === booking.userId && (
-                <button
-                    className="btn warning"
-                    type="button"
-                    onClick={() => handleClick(booking.id)}
-                    disabled={isLoading}
-                >
+    if (booking) content = (
+        <div className={styles.booking}>
+            <div className={styles.header}>
+                <p className={styles.time}><b>{localTime(booking.start)} - {localTime(booking.end)}</b></p>
+                {inProgress && <span className={styles.busy}>In progress</span>}
+            </div>
+            <p>{booking.name}</p>
+            <div className={styles.footer}>
+                <p className={styles.user}>{bookingOwner?.data?.name}</p>
+                {loggedInUser === booking.userId && (
+                    <button
+                        className="btn warning"
+                        type="button"
+                        onClick={() => handleClick(booking.id)}
+                        disabled={isLoading}
+                    >
                     Cancel
-                </button>
-            )}
+                    </button>
+                )}
+            </div>
         </div>
-    </div>);
+    );
 
     return content;
 };

@@ -16,9 +16,9 @@ export const Form = () => {
     const { resourceData: {
         durationStep,
         maxDuration,
-        minDuration
+        minDuration,
     },
-        nextMeeting: { timeRemaining },    
+    nextMeeting: { timeRemaining },    
     } = useAppSelector((state) => state.resource);
 
     const isDurationValid = (value: number): boolean => {

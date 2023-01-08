@@ -25,8 +25,10 @@ export const Header = () => {
     const handleLogin = async () => {
         try {
             const { data } = await login().unwrap();
+
             dispatch(setAuth(data));
             const { data: user } = await getMe().unwrap();
+
             dispatch(setUser(user));
         } catch (err) {
             console.error(err);
@@ -74,7 +76,7 @@ export const Header = () => {
                 className={classnames(styles.menuWrapper, menuOpen && styles.open)}
                 id="siteMenu"
                 tabIndex={-1}
-                {...(menuOpen && {role: "dialog", "aria-modal" : "true"})}
+                {...(menuOpen && { role: 'dialog', 'aria-modal' : 'true' })}
             >
                 <div className={styles.menuContainer}>
                     <div className={styles.menu}>
@@ -93,7 +95,7 @@ export const Header = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0l12 12a.75.75 0 1 1-1.06 1.06l-12-12a.75.75 0 0 1 0-1.06Z" clipRule="evenodd"/><path fill="currentColor" fillRule="evenodd" d="M18.53 5.47a.75.75 0 0 1 0 1.06l-12 12a.75.75 0 0 1-1.06-1.06l12-12a.75.75 0 0 1 1.06 0Z" clipRule="evenodd"/></svg>
                             </button>
                         </div>
-                        {!authToken &&
+                        {!authToken && (
                             <button
                                 className="btn"
                                 disabled={loginLoading}
@@ -102,7 +104,7 @@ export const Header = () => {
                             >
                                 Login
                             </button>
-                        }
+                        )}
                         {userName && (
                             <button
                                 className="btn"

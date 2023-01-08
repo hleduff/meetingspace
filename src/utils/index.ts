@@ -8,9 +8,9 @@ export const localTime = (date: string) => {
 
 export const checkDuration = (duration: number, max: number, min: number, value: number): boolean => {
     if ([
-        typeof value === "number" && value > 0,
+        typeof value === 'number' && value > 0,
         value >= min && value <= max,
-        value % duration === 0
+        value % duration === 0,
     ].every(Boolean)) return true;
 
     return false;

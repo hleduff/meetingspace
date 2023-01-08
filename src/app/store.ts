@@ -32,7 +32,7 @@ const reducers = {
 
 const rootReducer = combineReducers(reducers);
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,

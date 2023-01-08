@@ -19,8 +19,8 @@ export const userSlice = createSlice({
         setUser: (
             state,
             {
-                payload: { id, name, },
-            }: PayloadAction<{ id: string; name: string; }>
+                payload: { id, name },
+            }: PayloadAction<{ id: string; name: string; }>,
         ) => {
             state.id = id;
             state.name = name;
@@ -29,8 +29,8 @@ export const userSlice = createSlice({
     extraReducers: (builder) => {
         builder.addMatcher(
             apiSlice.endpoints.logout.matchFulfilled,
-                () => origState,
-        )
+            () => origState,
+        );
     },
 });
 

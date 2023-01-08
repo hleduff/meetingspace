@@ -22,26 +22,30 @@ export const Resource = () => {
                 durationStep: resource?.data.bookingDurationStep,
                 maxDuration: resource?.data.maximumBookingDuration,
                 minDuration: resource?.data.minimumBookingDuration,
-            }))
+            }));
         }
     }, [resource]);
 
     let content;
 
     if (user) {
-        content = <>
-            <Title>
-                <b className="highlight">{resource?.data.name}</b> is currently booked by <b className="highlight">{user.data.name}</b>. 
-            </Title>
-            <Text>You'll only be able to book the room once his meeting has ended.</Text>
-        </>
+        content = (
+            <>
+                <Title>
+                    <b className="highlight">{resource?.data.name}</b> is currently booked by <b className="highlight">{user.data.name}</b>. 
+                </Title>
+                <Text>You'll only be able to book the room once his meeting has ended.</Text>
+            </>
+        );
     } else {
-        content = <>
-            <Title>
+        content = (
+            <>
+                <Title>
                 Book the <b className="highlight">{resource?.data.name}</b> room:
-            </Title>
-            <Form />
-        </>
+                </Title>
+                <Form />
+            </>
+        );
     }
 
     return (
