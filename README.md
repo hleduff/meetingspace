@@ -38,46 +38,36 @@ $ npm i && npm run dev
 
 ### User features
 
-<ul>
-    <li>User has to login (no credentials needed): he receives a token which is used in every subsequent API request
-    <li>The interface then displays:
-        <ul>
-            <li>The current state of the only resource (meeting room): if it's available, you can book the room for a meeting starting from the present moment, for a given duration. If it's not, the interface says who is currently using the room.
-            <li>A list of all of today's meeting, with the schedule of the meeting (start/end time), the name of the meeting and the name of the user who booked it. If you're that user, you can cancel the meeting.
-        </ul>
-    <li>You can only book a meeting for the duration for which the room is available before the next meeting. You can only choose a duration that matches the constraints of the room: time steps, minimum duration, maximum duration.
-</ul>
+- User has to login (no credentials needed): he receives a token which is used in every subsequent API request
+- The interface then displays:<br>
+    • The current state of the only resource (meeting room): if it's available, you can book the room for a meeting starting from the present moment, for a given duration. If it's not, the interface says who is currently using the room.<br>
+    • A list of all of today's meeting, with the schedule of the meeting (start/end time), the name of the meeting and the name of the user who booked it. If you're that user, you can cancel the meeting.<br>
+- You can only book a meeting for the duration for which the room is available before the next meeting. You can only choose a duration that matches the constraints of the room: time steps, minimum duration, maximum duration.
 
 ### Development features
 
-<ul>
-    <li>This app was bootstrapped with [Vite](https://vitejs.dev/) using the `react-swc-ts` preset. [SWC](https://swc.rs/) is a much faster alternative to the JavaScript transpiler [Babel](https://babeljs.io/).
-    <li>[ESLint](https://eslint.org/) with [AirBNB](https://www.npmjs.com/package/eslint-config-airbnb-typescript)-based config.
-    <li>[Husky](https://typicode.github.io/husky) and [Lint Staged](https://github.com/okonet/lint-staged) to run ESLint automatically on commit
-</ul>
+- This app was bootstrapped with [Vite](https://vitejs.dev/) using the `react-swc-ts` preset. [SWC](https://swc.rs/) is a much faster alternative to the JavaScript transpiler [Babel](https://babeljs.io/).
+- [ESLint](https://eslint.org/) with [AirBNB](https://www.npmjs.com/package/eslint-config-airbnb-typescript)-based config.
+- [Husky](https://typicode.github.io/husky) and [Lint Staged](https://github.com/okonet/lint-staged) to run ESLint automatically on commit
 
 ### Project structure
 
 RTK Query's documentation is not always very clear about file structure, but I followed the examples they provided the best I could.
 
-<ul>
-    <li>The store is in `/src/app/store.ts``
-    <li>The components are in `/src/components/`
-    <li>The `/src/features/` folder contains the logic around the API and the [Slices](https://redux-toolkit.js.org/api/createslice). It's highly recommended to put all the API endpoints in an `apiSlice.ts` file in a `/src/api/` folder. There's also a `config.ts` file there because I wrote a custom BaseQuery (see comments there).
-    <li>The other folders in `/src/features/` contain the other Slices (state reducers).
-    <li>Finally, there are utility functions in `/utils/` and global types in `/types/`.
-</ul>
+- The store is in `/src/app/store.ts`
+- The components are in `/src/components/`
+- The `/src/features/` folder contains the logic around the API and the [Slices](https://redux-toolkit.js.org/api/createslice). It's highly recommended to put all the API endpoints in an `apiSlice.ts` file in a `/src/api/` folder. There's also a `config.ts` file there because I wrote a custom BaseQuery (see comments there).
+- The other folders in `/src/features/` contain the other Slices (state reducers).
+- Finally, there are utility functions in `/utils/` and global types in `/types/`.
 
 ## Plans for next releases
 
 There are some things I'm not totally satisfied with in this project, and am thinking of improving.
 
-<ul>
-    <li>Consider refactoring the app with a better separation between presentational/functional (stateless/stateful) components. In that case, the functionnalities would go in the /features/ folders and the presentational components in /components/. But I am not sure it would make the project more readable.
-    <li>Install SaSS to write cleaner styles. For example at this point the button styles are too verbose.
-    <li>Work on a better UX for the form, with custom validation for fields, error messages, etc. At this point the native form validation is used, and it's not easy to understand what inputs the "Duration" field accepts.
-    <li>A better UI for the form on mobile screens, with full-width fields and button for example.
-    <li>Work on the React rendering cycle: for now the form always renders before being replaced by the "room currently occupied" message.
-    <li>A better timeline (with a Outlook-style day schedule showing all the hours in the day)
-    <li>Work on accessibility ("skip to content" link, test with screen readers, better color contrast)
-</ul>
+- Consider refactoring the app with a better separation between presentational/functional (stateless/stateful) components. In that case, the functionnalities would go in the /features/ folders and the presentational components in /components/. But I am not sure it would make the project more readable.
+- Install SaSS to write cleaner styles. For example at this point the button styles are too verbose.
+- Work on a better UX for the form, with custom validation for fields, error messages, etc. At this point the native form validation is used, and it's not easy to understand what inputs the "Duration" field accepts.
+- A better UI for the form on mobile screens, with full-width fields and button for example.
+- Work on the React rendering cycle: for now the form always renders before being replaced by the "room currently occupied" message.
+- A better timeline (with a Outlook-style day schedule showing all the hours in the day)
+- Work on accessibility ("skip to content" link, test with screen readers, better color contrast)
