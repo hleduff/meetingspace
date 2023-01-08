@@ -55,7 +55,7 @@ export const Form = () => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formLine}>
-                <label className={styles.label} htmlFor="duration">Duration:</label>
+                <label className={styles.label} htmlFor="duration">Duration</label>
                 <input
                     className="input"
                     id="duration"
@@ -69,7 +69,7 @@ export const Form = () => {
                 /> mins
             </div>
             <div className={styles.formLine}>
-                <label className={styles.label} htmlFor="name">Meeting name:</label>
+                <label className={styles.label} htmlFor="name">Meeting name</label>
                 <input
                     className="input"
                     id="name"
@@ -82,7 +82,7 @@ export const Form = () => {
                     value={bookingData.name}
                 />
             </div>
-            <div className={`${styles.formLine} ${styles.formLine}`}>
+            <div className={styles.btnLine}>
                 <button className="btn" disabled={creatingBooking} type="submit">
                     Book
                 </button>

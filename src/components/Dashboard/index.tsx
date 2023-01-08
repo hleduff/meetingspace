@@ -12,9 +12,13 @@ export const Dashboard = () => {
             <Resource />
             <div>
                 <Title>Schedule:</Title>
-                <div className={styles.bookingsList}>
-                    {bookings?.data.map((booking: IBooking) => <Booking key={booking.id} booking={booking} />)}
-                </div>
+                <ol className={styles.bookingsList}>
+                    {bookings?.data.map((booking: IBooking) => (
+                        <li key={booking.id}>
+                            <Booking key={booking.id} booking={booking} />
+                        </li>
+                    ))}
+                </ol>
             </div>
         </div>
     );
