@@ -20,7 +20,7 @@ export const authSlice = createSlice({
             state,
             {
                 payload: { token, expirationDate },
-            }: PayloadAction<{ token: string; expirationDate: string }>
+            }: PayloadAction<{ token: string; expirationDate: string }>,
         ) => {
             state.token = token;
             state.expirationDate = expirationDate;
@@ -29,8 +29,8 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder.addMatcher(
             apiSlice.endpoints.logout.matchFulfilled,
-                () => origState,
-        )
+            () => origState,
+        );
     },
 });
 

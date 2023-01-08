@@ -6,7 +6,7 @@ const App = () => {
 
     let content;
 
-    if (authToken) content = <Dashboard />
+    if (authToken) content = <Dashboard />;
     else content = (
         <>
             <Text>You must be logged in to use this app!</Text>

@@ -37,8 +37,8 @@ export const resourceSlice = createSlice({
         setCurrentMeeting: (
             state,
             {
-                payload: { userId, },
-            }: PayloadAction<{ userId: string; }>
+                payload: { userId },
+            }: PayloadAction<{ userId: string; }>,
         ) => {
             state.currentMeeting.inProgress = true;
             state.currentMeeting.userId = userId;
@@ -46,16 +46,16 @@ export const resourceSlice = createSlice({
         setNextMeeting: (
             state,
             {
-                payload: { timeRemaining, },
-            }: PayloadAction<{ timeRemaining: number }>
+                payload: { timeRemaining },
+            }: PayloadAction<{ timeRemaining: number }>,
         ) => {
             state.nextMeeting.timeRemaining = timeRemaining;
         },
         setResourceData: (
             state,
             {
-                payload: { durationStep, maxDuration, minDuration, },
-            }: PayloadAction<{ durationStep: number; maxDuration: number; minDuration: number; }>
+                payload: { durationStep, maxDuration, minDuration },
+            }: PayloadAction<{ durationStep: number; maxDuration: number; minDuration: number; }>,
         ) => {
             state.resourceData.durationStep = durationStep;
             state.resourceData.maxDuration = maxDuration;

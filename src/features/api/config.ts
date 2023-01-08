@@ -36,7 +36,7 @@ const baseQuery = fetchBaseQuery({
 export const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
     args,
     api,
-    extraOptions
+    extraOptions,
 ) => {
     const result = await baseQuery(args, api, extraOptions);
 
