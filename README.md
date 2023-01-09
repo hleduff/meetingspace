@@ -43,6 +43,7 @@ $ npm i && npm run dev
     • The current state of the only resource (meeting room): if it's available, you can book the room for a meeting starting from the present moment, for a given duration. If it's not, the interface says who is currently using the room.<br>
     • A list of all of today's meeting, with the schedule of the meeting (start/end time), the name of the meeting and the name of the user who booked it. If you're that user, you can cancel the meeting.<br>
 - You can only book a meeting for the duration for which the room is available before the next meeting. You can only choose a duration that matches the constraints of the room: time steps, minimum duration, maximum duration.
+- Compatible with your color scheme preference (light or dark mode in your browser or OS).
 
 ### Development features
 
@@ -71,3 +72,4 @@ There are some things I'm not totally satisfied with in this project, and am thi
 - Work on the React rendering cycle: for now the form always renders before being replaced by the "room currently occupied" message.
 - A better timeline (with a Outlook-style day schedule showing all the hours in the day)
 - Work on accessibility ("skip to content" link, test with screen readers, better color contrast)
+- Add a toggle dark/light mode switch
